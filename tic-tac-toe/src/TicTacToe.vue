@@ -1,8 +1,9 @@
+
 <template>
   <div class="tictactoe-board">
     <div v-for="(n, i) in 3">
       <div v-for="(n, j) in 3">
-        <cell :value="board[i][j]"></cell>
+        <cell @click="performMove(i, j)" :value="board[i][j]"></cell>
       </div>
     </div>
   </div>
@@ -16,7 +17,18 @@
           ['', '', '']
         ]
     } },
-
+    methods: {
+      performMove(x, y) {
+        if (this.board[x][y] !== '') {
+          // Invalid move.
+          return;
+        }
+        this.board[x][y] = 'x';
+        this.$forceUpdate();
+        // TODO implement some AI super-overlord algorithm that will calculate
+        //  the computers move.
+      }
+    }
   }
 </script>
 <style>
